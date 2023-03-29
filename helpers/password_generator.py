@@ -27,7 +27,22 @@ class PasswordGenerator:
 
         return new_password
 
+    def set_password_length(self, length: int) -> None:
+        self.password_length = length
+
+    def set_include_symbols(self, include_symbols: bool) -> None:
+        self.include_symbols = include_symbols
+
+    def set_include_numbers(self, include_numbers: bool) -> None:
+        self.include_numbers = include_numbers
+
+    def set_include_lowercase(self, include_lowercase: bool) -> None:
+        self.include_lowercase = include_lowercase
+
+    def set_include_uppercase(self, include_uppercase: bool) -> None:
+        self.include_uppercase = include_uppercase
+
 
 if __name__ == "__main__":
-    pgen = PasswordGenerator()
-    pgen.generate_password()
+    password_generator = PasswordGenerator()
+    print(password_generator.generate_password())
