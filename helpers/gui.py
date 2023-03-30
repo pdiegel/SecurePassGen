@@ -1,13 +1,12 @@
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from config import *
-from helpers.password_generator import PasswordGenerator
 import random
 import string
 
 
 class App(ttk.Window):
-    def __init__(self):
+    def __init__(self, password_generator):
         super().__init__()
         self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
         row = 0
@@ -18,6 +17,7 @@ class App(ttk.Window):
         self.include_numbers = ttk.BooleanVar()
         self.include_lowercase = ttk.BooleanVar()
         self.include_uppercase = ttk.BooleanVar()
+        self.password_generator = password_generator
 
         # Create a label
         label = ttk.Label(self, text="Password Generator")
@@ -74,7 +74,7 @@ class App(ttk.Window):
             "Generate Password",
             row,
             column,
-            self.generate_password,
+            self.password_generator,
         )
         column += 1
         self.password = self.create_label(
@@ -148,30 +148,7 @@ class App(ttk.Window):
         except ValueError:
             raise ValueError("Password length must be an integer.")
 
-    def generate_password(self) -> None:
-        password_pool = []
-        if self.get_include_symbols():
-            password_pool += string.punctuation
-        if self.get_include_numbers():
-            password_pool += string.digits
-        if self.get_include_lowercase():
-            password_pool += string.ascii_lowercase
-        if self.get_include_uppercase():
-            password_pool += string.ascii_uppercase
-
-        try:
-            password_length = self.get_password_length()
-            if password_length < 1:
-                raise ValueError("Password length must be at least 1.")
-        except ValueError as error:
-            print(error)
-            return ""
-
-        if password_pool:
-            new_password = "".join(
-                [random.choice(password_pool) for _ in range(password_length)]
-            )
             print(new_password)
-            self.password.config(text=new_password)
+
         else:
             print("No characters selected")

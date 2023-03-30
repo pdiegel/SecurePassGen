@@ -4,7 +4,7 @@ from helpers.password_generator import PasswordGenerator
 
 class Controller:
     def __init__(self):
-        self.app = App()
+        self.app = App(self.generate_password)
         self.password_generator = PasswordGenerator()
 
     def get_app_inputs(self):
@@ -25,4 +25,5 @@ class Controller:
 
     def generate_password(self):
         self.get_app_inputs()
-        self.password_generator.generate_password()
+        new_password = self.password_generator.generate_password()
+        self.app.password.config(text=new_password)
