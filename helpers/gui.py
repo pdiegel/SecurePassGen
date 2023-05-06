@@ -1,11 +1,11 @@
 import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
-from config import *
-import random
-import string
+from ttkbootstrap.constants import W, N
+from config import WINDOW_HEIGHT, WINDOW_WIDTH
 
 
 class App(ttk.Window):
+    """This class represents the GUI for the application."""
+
     def __init__(self, password_generator):
         super().__init__()
         self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
@@ -19,7 +19,6 @@ class App(ttk.Window):
         self.include_uppercase = ttk.BooleanVar()
         self.password_generator = password_generator
 
-        # Create a label
         label = ttk.Label(self, text="Password Generator")
         label.grid(row=row, column=column, columnspan=2, sticky=N)
         label.config(font=("Arial", 20))
@@ -81,29 +80,41 @@ class App(ttk.Window):
             self, "Generated Password", row, column
         )
 
-    def create_label(self, frame, text, row, column):
-        """
-        Create a text label and add it to a frame.
-        """
+    def create_label(
+        self,
+        frame,
+        text,
+        row,
+        column,
+    ) -> ttk.Label:
+        """Creates and returns a tkinter text label."""
         label = ttk.Label(frame, text=text)
         label.config(font=("Arial", 12))
         label.grid(row=row, column=column, sticky=W, padx=5, pady=5)
         return label
 
     def create_single_line_entry(
-        self, frame: ttk.Frame, name, row, column
+        self,
+        frame: ttk.Frame,
+        name,
+        row,
+        column,
     ) -> ttk.Entry:
-        """
-        Create a single-line entry widget and add it to a frame.
-        """
+        """Creates and returns a tkinter entry widget."""
         entry = ttk.Entry(frame, name=name)
         entry.grid(row=row, column=column + 1, sticky=W, padx=15, pady=5)
         entry.config(font=("Arial", 12))
         return entry
 
     def create_checkbox(
-        self, frame: ttk.Frame, variable, text, row, column
+        self,
+        frame: ttk.Frame,
+        variable,
+        text,
+        row,
+        column,
     ) -> ttk.Checkbutton:
+        """Creates and returns a tkinter checkbox widget."""
         style = ttk.Style()
         style.configure("Custom.TCheckbutton", font=("Arial", 12))
 
@@ -121,34 +132,49 @@ class App(ttk.Window):
         return checkbox
 
     def create_button(
-        self, frame: ttk.Frame, text, row, column, command
+        self,
+        frame: ttk.Frame,
+        text,
+        row,
+        column,
+        command,
     ) -> ttk.Button:
+        """Creates and returns a tkinter button widget."""
         button = ttk.Button(frame, text=text, command=command)
         button.grid(row=row, column=column, padx=5, pady=5, ipadx=15, ipady=5)
         return button
 
-    def get_include_symbols(self):
+    def get_include_symbols(self) -> bool:
+        """Returns a boolean value indicating if symbols should be
+        included in the password."""
         return self.include_symbols.get()
 
-    def get_include_numbers(self):
+    def get_include_numbers(self) -> bool:
+        """Returns a boolean value indicating if numbers should be
+        included in the password."""
         return self.include_numbers.get()
 
-    def get_include_lowercase(self):
+    def get_include_lowercase(self) -> bool:
+        """Returns a boolean value indicating if lowercase letters
+        should be included in the password."""
         return self.include_lowercase.get()
 
-    def get_include_uppercase(self):
+    def get_include_uppercase(self) -> bool:
+        """Returns a boolean value indicating if uppercase letters
+        should be included in the password."""
         return self.include_uppercase.get()
 
-    def get_show_password(self):
+    def get_show_password(self) -> bool:
+        """Returns a boolean value indicating if the password should be
+        shown."""
         return self.show_password.get()
 
-    def get_password_length(self):
+    def get_password_length(self) -> int:
+        """Returns the password length as an integer."""
         try:
             return int(self.password_length.get())
         except ValueError:
             raise ValueError("Password length must be an integer.")
-
-            print(new_password)
 
         else:
             print("No characters selected")
