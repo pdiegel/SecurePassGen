@@ -24,11 +24,10 @@ This repository contains a simple yet customizable password generator applicatio
 `python -m venv venv`
 
 4. Activate the virtual environment:
-
-- On Windows:
-    `venv\Scripts\activate`
-- On Linux or macOS:
-    `source venv/bin/activate`
+    - On Windows:
+        `venv\Scripts\activate`
+    - On Linux or macOS:
+        `source venv/bin/activate`
 
 5. Install the required packages:
 `pip install -r requirements.txt`
